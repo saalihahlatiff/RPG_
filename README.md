@@ -18,3 +18,4 @@ For example, the user can continuously go to the character page then go back to 
   3. Design character page
   4. Delay each line of game play output
   5. Write the How to Play guide
+  6. Think of a title for the game
