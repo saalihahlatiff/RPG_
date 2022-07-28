@@ -15,7 +15,6 @@ For example, the user can continuously go to the character page then go back to 
 # To-Do List/Features yet to come
   1. Quit whenever the user wants
   2. Save/Load Game
-  3. Design character page
-  4. Delay each line of game play output
-  5. Write the How to Play guide
-  6. Think of a title for the game
+  3. Delay each line of game play output
+  4. Write the How to Play guide
+  5. Think of a title for the game
