@@ -1,15 +1,15 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <cstdlib>
 #include "Character.h"
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
-ifstream inFS;            //file where game is opened from and saved (input)
+ifstream inFS; // file where game is opened from and saved (input)
 string filename = "save.txt";
 char userInput;
-bool isValid = true; 
+bool isValid = true;
 
 Character player;
 Character opp;
@@ -52,11 +52,11 @@ void actions(){
     player.ninja.act.defend.effect.name = "Dodge!";
     player.ninja.act.defend.effect.userXP = +2;
     player.ninja.act.defend.effect.oppontXP = -10;
-  
+
 }
 */
 
-//ALL FUNCTIONS
+// ALL FUNCTIONS
 void Error();
 char getUserInput();
 void MenuInput();
@@ -71,87 +71,166 @@ void LoadNewGame();
 int LoadSavedGame();
 void SaveGame();
 
-
-//GENERAL FUNCTIONS
-void Error(){
+// GENERAL FUNCTIONS
+void Error() {
   cout << "Incorrect input. Try again" << endl;
   getUserInput();
 }
 
-char getUserInput(){
-  cin >> userInput; 
+char getUserInput() {
+  cin >> userInput;
   userInput = toupper(userInput);
   return userInput;
 }
 
-void PrintOpening(string str){
-  cout << "opening... " << str << endl << endl;
-  //return 0;
+void PrintOpening(string str) {
+  cout << endl << "opening... " << str << endl << endl;
+  // return 0;
 }
 
-void PrintTest(){
-  cout << "testing... input: " << userInput << endl << endl; 
-  //return 0;
+void PrintTest() {
+  cout << "testing... input: " << userInput << endl << endl;
+  // return 0;
 }
 
-//FUNCTIONS FOR MENU
-void MenuInput(){
+// FUNCTIONS FOR MENU
+void MenuInput() {
   cout << "(A) New Game, (B) Resume Saved Game, (C) How to Play " << endl;
   getUserInput();
   PrintTest();
 
   isValid = true;
-  while(isValid){
-  if(userInput == 'A'){isValid = false; OpenNewGameSubMenu();}
-  else if(userInput == 'B'){isValid = false; LoadSavedGame();}
-  else if(userInput == 'C'){isValid = false; OpenPlayGuide();}
-  else{Error(); }
+  while (isValid) {
+    if (userInput == 'A') {
+      isValid = false;
+      OpenNewGameSubMenu();
+    } else if (userInput == 'B') {
+      isValid = false;
+      LoadSavedGame();
+    } else if (userInput == 'C') {
+      isValid = false;
+      OpenPlayGuide();
+    } else {
+      Error();
+    }
   }
-
 }
 
-void OpenNewGameSubMenu(){
+void OpenNewGameSubMenu() {
   cout << " Choose a player: (A) Knight, (B) Mage, (C) Ninja " << endl;
 
   getUserInput();
-  PrintTest();
+  // PrintTest();
 
   isValid = true;
-  while(isValid){
-    if(userInput == 'A' || userInput == 'B' || userInput == 'C'){ 
+  while (isValid) {
+    if (userInput == 'A' || userInput == 'B' || userInput == 'C') {
       isValid = false;
       PrintOpening("character page");
       OpenCharacterPage();
+    } else {
+      Error();
     }
-    else{Error();}
   }
-
 }
 
-void OpenCharacterPage(){
+void OpenCharacterPage() {
 
   cout << "You picked character: ";
 
-  if(userInput == 'A'){
-    cout << "knight";
+  if (userInput == 'A') {
+    cout << "Knight" << endl
+         << endl
+
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⣶⣿⣿⣿⣶⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⣠⣿⣿⣿⢟⣭⣴⣶⡦⠍⠛⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀           ⠀"
+         << "A B I L I T I E S" << endl
+         << "⠈⠳⣶⣤⣤⣶⣿⠿⢫⣾⣿⣿⠋⠀⠀⠀⠀⢸⣿⡟⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀" << endl
+         << "⠀⠀⠈⠉⠉⠉⠁⣰⣿⣿⣿⠇⠀⢀⣀⣤⣴⣾⣧⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀          "
+         << "Attack           HIGH" << endl
+         << "⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⡟⢠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⣠⣿⣿⣿⡟⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀          "
+         << "Damage           MED" << endl
+         << "⠀⠀⢀⣠⣶⣿⣿⡿⠋⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⠀⠀⠀⠀" << endl
+         << "⠉⠛⠛⠛⠛⠛⠉⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⣛⣥⣶⣆⠀⠀⠀          "
+         << "Defense          MED" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⠏⣥⣤⡙⢟⣫⡴⠿⠿⠿⠷⠿⣷⡀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⡜⢿⡿⢃⣌⢻⣟⠛⠻⠶⠶⢶⣾⣿⡄          "
+         << "Magic            LOW" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⡄⣾⣿⣿⣷⡝⢿⣷⣶⣶⣦⡾⠟⠁" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣟⣛⣻⠿⠿⢧⢹⣿⣿⣿⣿⣦⡙⢷⡶⠋⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣝⠻⣿⣿⣛⠷⠌⢿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣮⣝⠻⣿⣶⣦⣤⣉⠛⠿⢿⠁⠀⠀⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⠰⣾⣿⣿⣿⣿⣿⣿⣿⣿⣶⣭⣛⠿⢿⣧⢷⣤⡀⠀⠀⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⠛⠿⣿⣿⣿⣿⣷⡦⠉⢿⣿⡷⠦⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⡿⠋⠀⠀⠈⠀⠀⠀⠀⠀⠀" << endl;
+
     player.SetAttackGraphics("Slash!");
     player.SetAttackXP(-5);
     opp.SetAttackedXP(-15);
     player.SetDefenseGraphics("Shield!");
     player.SetDefenseXP(0);
     opp.SetDefendedXP(-10);
-  }  
-  else if(userInput == 'B'){
-    cout << "mage";
-    player.SetAttackGraphics("Attack Spell!");
+  }
+  else if (userInput == 'B') {
+    cout << "Mage" << endl
+         << endl
+         << "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿" << endl
+         << "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠈⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿" << endl
+         << "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿" << endl
+         << "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠐⣄⠀⠀⢻⣿⣿⣿⣿⣿⣿          "
+         << " A B I L I T I E S" << endl
+         << "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣣⠴⠒⠋⠉⠁⠀⠀⠀⠀⠀⠘⢷⣄⠀⢻⣿⣿⣿⣿⣿" << endl
+         << "⣿⣿⣿⣿⣿⣿⣿⣿⠋⢁⣀⣀⣤⣤⣤⣤⣤⣄⣀⣀⡀⠘⣿⣷⣬⣿⣿⣿⣿⣿          "
+         << "Attack           HIGH" << endl
+         << "⣿⣿⣿⣿⡿⣿⣿⣿⣿⠿⠿⠿⠿⢿⣿⣿⡿⠿⠿⠿⠿⣿⣿⣿⣿⢿⣿⣿⣿⣿" << endl
+         << "⣿⡟⠉⠀⠀⣿⠁⣿⠷⢶⣶⣶⣶⣶⡿⢿⣶⣶⣶⣶⡶⠾⣿⠈⣿⠀⠀⠉⢻⣿          "
+         << "Damage           MED" << endl
+         << "⣿⣿⣄⡀⠀⢿⡆⣿⠀⠀⢙⣛⣫⡿⠀⠀⢿⣝⣛⡋⠀⠀⣿⢰⡿⠀⢀⣠⣿⣿" << endl
+         << "⣿⣿⣿⣿⣷⣾⣿⣿⡷⠞⠋⠉⠉⠹⣦⣴⠏⠉⠉⠙⠳⢾⣿⣿⣷⣾⣿⣿⣿⣿          "
+         << "Defense          MED" << endl
+         << "⣿⣿⣿⣿⣿⡿⠟⠋⠀⠀⠀⠀⣀⣴⠿⠿⣦⣀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿" << endl
+         << "⣿⣿⣿⣿⣿⣶⣶⣶⣶⠶⠾⠛⠛⠛⠛⠛⠛⠛⠛⠷⠶⣶⣶⣶⣶⣿⣿⣿⣿⣿          "
+         << "Magic            HIGH" << endl
+         << "⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿" << endl
+         << "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿" << endl
+         << "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣤⣤⣤⣤⣤⣤⣤⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿" << endl;
+
+    player.SetAttackGraphics("Attack Spell! (∩｀o-´o)⊃━☆ﾟ.*･");
     player.SetAttackXP(-5);
     opp.SetAttackedXP(-15);
-    player.SetDefenseGraphics("Healing Spell!");
+    player.SetDefenseGraphics("Healing Spell! (∩ ͝ ° ͜ʖ͡° )⊃━☆ﾟ.*･｡ﾟ");
     player.SetDefenseXP(8);
     opp.SetDefendedXP(0);
-  }
-  else if(userInput == 'C'){
-    cout << "ninja";
+  } 
+    
+  else if (userInput == 'C') {
+    cout << "Ninja" << endl
+         << endl
+
+         << " ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣠⣤⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⣀⠀⠀⠀⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠴⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠠⠶⠶⠶⠶⢶⣶⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀⠀⠀          "
+         << " A B I L I T I E S" << endl
+         << "⠀⠀⠀⠀⢀⣴⣶⣶⣶⣶⣶⣶⣦⣬⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀" << endl
+         << "⠀⠀⠀⠀⣸⣿⡿⠟⠛⠛⠋⠉⠉⠉⠁⠀⠀⠀⠈⠉⠉⠉⠙⠛⠛⠿⣿⣿⡄⠀          "
+         << "Attack           HIGH" << endl
+         << "⠀⠀⠀⠀⣿⠋⠀⠀⠀⠐⢶⣶⣶⠆⠀⠀⠀⠀⠀⢶⣶⣶⠖⠂⠀⠀⠈⢻⡇⠀" << endl
+         << "⠀⠀⠀⠀⢹⣦⡀⠀⠀⠀⠀⠉⢁⣠⣤⣶⣶⣶⣤⣄⣀⠀⠀⠀⠀⠀⣀⣾⠃⠀          "
+         << "Damage           HIGH" << endl
+         << "⠀⠀⠀⠀⠘⣿⣿⣿⣶⣶⣶⣾⣿⣿⣿⡿⠿⠿⣿⣿⣿⣿⣷⣶⣾⣿⣿⡿⠀⠀" << endl
+         << "⠀⠀⢀⣴⡀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀          ⠀"
+         << "Defense          LOW" << endl
+         << "⠀⠀⣾⡿⢃⡀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀" << endl
+         << "⠀⢸⠏⠀⣿⡇⠀⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⠁⠀⠀⠀          ⠀"
+         << "Magic            LOW" << endl
+         << "⠀⠀⠀⢰⣿⠃⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⠛⠛⣉⣁⣤⡶⠁⠀⠀⠀⠀⠀" << endl
+         << "⠀⠀⣠⠟⠁⠀⠀⠀⠀⠀⠈⠛⠿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀⠀⠀" << endl
+         << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+
     player.SetAttackGraphics("Ninja stars!");
     player.SetAttackXP(-2);
     opp.SetAttackedXP(-15);
@@ -165,54 +244,66 @@ void OpenCharacterPage(){
   getUserInput();
 
   isValid = true;
-  while(isValid){
-    if(userInput == 'A'){isValid = false; cout << endl; LoadNewGame();}
-    else if(userInput == 'B'){isValid = false; OpenNewGameSubMenu();}
-    else{ Error();}
+  while (isValid) {
+    if (userInput == 'A') {
+      isValid = false;
+      cout << endl;
+      LoadNewGame();
+    } else if (userInput == 'B') {
+      isValid = false;
+      OpenNewGameSubMenu();
+    } else {
+      Error();
+    }
   }
-
 }
 
-void OpenPlayGuide(){
-    cout << "How to Play" << endl
-         << "(A) Go Back" << endl;
-  
+void OpenPlayGuide() {
+  cout << "How to Play" << endl << "(A) Go Back" << endl;
+
   getUserInput();
   isValid = true;
-  while(isValid){
-    if(userInput == 'A'){isValid = false; PrintOpening("menu"); MenuInput();}
-    else{Error();}
+  while (isValid) {
+    if (userInput == 'A') {
+      isValid = false;
+      PrintOpening("menu");
+      MenuInput();
+    } else {
+      Error();
+    }
   }
 }
 
-//FUNCTIONS FOR GAME ACTIONS
-void GetUserAction(){
+// FUNCTIONS FOR GAME ACTIONS
+void GetUserAction() {
   cout << "Choose your action: (A) Attack, (B) Defend" << endl;
   getUserInput();
-  
+
   isValid = true;
-  while(isValid){
-    if(userInput == 'A'){
-      isValid = false; 
-      cout << "You chose attack" << endl << player.GetAttackGraphics() << endl
+  while (isValid) {
+    if (userInput == 'A') {
+      isValid = false;
+      cout << "You chose attack" << endl
+           << player.GetAttackGraphics() << endl
            << "  -" << player.GetAttackXP() << "             "
            << "-" << opp.GotAttacked() << endl;
-    }
-    else if(userInput == 'B'){
-      isValid = false; 
-      cout << "You chose defend" << endl << player.GetDefenseGraphics() << endl
+    } else if (userInput == 'B') {
+      isValid = false;
+      cout << "You chose defend" << endl
+           << player.GetDefenseGraphics() << endl
            << "  -" << player.GetDefenseXP() << "             "
            << "-" << opp.DefendedXP() << endl;
+    } else {
+      Error();
     }
-    else{Error();}
   }
 }
 
-void GetOpponentPlayer(){
+void GetOpponentPlayer() {
   srand(time(0));
   int num = rand() % 3;
-  
-  if(num == 0){ 
+
+  if (num == 0) {
     opp.SetName("The Goblin");
     opp.SetAttackGraphics("Swing!");
     opp.SetAttackXP(-3);
@@ -220,8 +311,7 @@ void GetOpponentPlayer(){
     opp.SetDefenseGraphics("Run away!");
     opp.SetDefenseXP(-8);
     player.SetDefendedXP(0);
-  }
-  else if(num == 1){
+  } else if (num == 1) {
     opp.SetName("The Evil Wizard");
     opp.SetAttackGraphics("Mind control!");
     opp.SetAttackXP(-5);
@@ -229,8 +319,7 @@ void GetOpponentPlayer(){
     opp.SetDefenseGraphics("Invisiblity cloak!");
     opp.SetDefenseXP(-10);
     player.SetDefendedXP(-15);
-  }
-  else if(num == 2){
+  } else if (num == 2) {
     opp.SetName("Boxer");
     opp.SetAttackGraphics("Jab!");
     opp.SetAttackXP(-4);
@@ -239,34 +328,36 @@ void GetOpponentPlayer(){
     opp.SetDefenseXP(0);
     player.SetDefendedXP(-7);
   }
-  cout << "Your opponent, " << opp.GetName() << ", has appeared!"<< endl;
+  cout << "Your opponent, " << opp.GetName() << ", has appeared!" << endl;
 }
 
-void GetOpponentAction(){
+void GetOpponentAction() {
   srand(time(0));
   int num = rand() % 2;
 
   cout << opp.GetName();
-  if(num == 0){
-    cout << " attacked you" << endl << opp.GetAttackGraphics() << endl
+  if (num == 0) {
+    cout << " attacked you" << endl
+         << opp.GetAttackGraphics() << endl
          << "  -" << player.GotAttacked() << "             "
          << "-" << opp.GetAttackXP() << endl;
-  }
-  else if(num == 1){
-    cout << " defended" << endl << opp.GetDefenseGraphics() << endl
+  } else if (num == 1) {
+    cout << " defended" << endl
+         << opp.GetDefenseGraphics() << endl
          << "  -" << player.DefendedXP() << "             "
          << "-" << opp.GetDefenseXP() << endl;
+  } else {
+    cout << "Error:" << num;
   }
-  else{ cout << "Error:" << num; }
 }
 
-void PrintTotalXPs(){
-  cout << "Your XP: " << player.ReturnTotalXP() << "             " 
+void PrintTotalXPs() {
+  cout << "Your XP: " << player.ReturnTotalXP() << "             "
        << opp.GetName() << " XP: " << opp.ReturnTotalXP() << endl;
 }
 
-void GamePlay(){
-  while(player.ReturnTotalXP() > 0 && opp.ReturnTotalXP() > 0){
+void GamePlay() {
+  while (player.ReturnTotalXP() > 0 && opp.ReturnTotalXP() > 0) {
     PrintTotalXPs();
     cout << endl;
     GetUserAction();
@@ -279,44 +370,46 @@ void GamePlay(){
   PrintTotalXPs();
 }
 
-//FUNCTIONS FOR I/O
+// FUNCTIONS FOR I/O
 
-void LoadNewGame(){
-  //cout << "this is the start new game" << endl
+void LoadNewGame() {
+  // cout << "this is the start new game" << endl
   //     << "loading opponent.." << endl;
   GetOpponentPlayer();
   cout << endl;
   GamePlay();
 }
 
-int LoadSavedGame(){
-    cout << "Opening list of saved games..." << endl;
+int LoadSavedGame() {
+  cout << "Opening list of saved games..." << endl;
 
-    inFS.open("save.txt");
-    if (!(inFS.is_open())){ cout << "ERROR: Could not open file" << endl; 
-      return 1;
-    }
+  inFS.open("save.txt");
+  if (!(inFS.is_open())) {
+    cout << "ERROR: Could not open file" << endl;
+    return 1;
+  }
 
-    if(inFS.peek() == std::ifstream::traits_type::eof()){ cout << "No saved games" << endl; return 0;}
-    else{
-        //output usernames of the files saved then allow the user to pick a file;
-      cout << "File is NOT empty";
-      return 0;
-    }
-  
-//return 0;
+  if (inFS.peek() == std::ifstream::traits_type::eof()) {
+    cout << "No saved games" << endl;
+    return 0;
+  } else {
+    // output usernames of the files saved then allow the user to pick a file;
+    cout << "File is NOT empty";
+    return 0;
+  }
+
+  // return 0;
 };
 
-void SaveGame(){
-    //save username, character type and xp;
-    //fin << c;
-    cout << "Closing file " << endl;
-    inFS.close(); // Done with file, so close it
-  //return 0;
+void SaveGame() {
+  // save username, character type and xp;
+  // fin << c;
+  cout << "Closing file " << endl;
+  inFS.close(); // Done with file, so close it
+  // return 0;
 }
 
-
-int main(){
+int main() {
   string username;
   cout << "Enter Username: " << endl;
   cin >> username;
@@ -324,19 +417,21 @@ int main(){
   cout << "Hi " << username << "!" << endl << endl;
 
   int xp;
-  MenuInput(); //function that gets username, character option, etc.
+  MenuInput(); // function that gets username, character option, etc.
 
   cout << "WE'RE BACK IN INT MAIN ";
 
-
-  
-  if(userInput == 'Q'){
+  if (userInput == 'Q') {
     cout << " Would you like to save the game? " << endl
          << "(A) Yes, (B) No" << endl;
     cin >> userInput;
-    if(userInput == 'A'){SaveGame();}
-    //else if(userInput == 'B'){break;}
-    else{Error();}
+    if (userInput == 'A') {
+      SaveGame();
+    }
+    // else if(userInput == 'B'){break;}
+    else {
+      Error();
+    }
   }
 
   inFS.close();
