@@ -11,10 +11,3 @@ be written for each use.
 Infinite ability to go back and forth:
 When the option of going back to the previous "page" or previous question is provided, the user can continuously go back and forth. 
 For example, the user can continuously go to the character page then go back to choose another character then back again to the character page.
-
-# To-Do List/Features yet to come
-  1. Quit whenever the user wants
-  2. Save/Load Game
-  3. Delay each line of game play output
-  4. Write the How to Play guide
-  5. Think of a title for the game
